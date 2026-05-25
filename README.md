@@ -10,7 +10,7 @@ class of "undefined symbol" failures.
 ## Install
 
 ```bash
-brew tap luxfi/luxfi
+brew tap luxfi/tap
 brew install lux-lattice    # GPU-accelerated lattice cryptography
 brew install lux-crypto     # secp256k1, blake3, poseidon2, ...
 brew install lux-fhe        # FHE backends (CRDT, CKKS, BFV)
