@@ -22,6 +22,15 @@ class LuxLattice < Formula
     system "cmake", "-S", ".", "-B", "build", *args
     system "cmake", "--build", "build", "--config", "Release"
     system "cmake", "--install", "build"
+
+    # v1.0.0 of the upstream lattice repo installs `liblattice.dylib`
+    # (no `lux` prefix). Go cgo bindings on the consumer side use
+    # `#cgo pkg-config: lux-lattice` + `-lluxlattice` per the post-v1.0.0
+    # naming convention. Add a `libluxlattice.dylib` alias so the
+    # linker resolves either name to the same Mach-O.
+    if File.exist?("#{lib}/liblattice.dylib") && !File.exist?("#{lib}/libluxlattice.dylib")
+      ln_sf "liblattice.dylib", "#{lib}/libluxlattice.dylib"
+    end
   end
 
   test do
