@@ -1,8 +1,12 @@
 class LuxLattice < Formula
   desc "GPU-accelerated lattice cryptography for the Lux platform"
   homepage "https://github.com/luxcpp/lattice"
-  url "https://github.com/luxcpp/lattice/archive/refs/tags/v1.1.0.tar.gz"
-  sha256 "9b9a2d30789bd1520928220b3f1ee4540088c1163947ab043a96311cd76e2047"
+  # v1.0.0 is the last self-contained lattice tarball. v1.1.0+ uses
+  # `../crypto/math/ntt/cpu/lattice_ring.cpp` (a sibling-repo path)
+  # which doesn't extract from the GitHub archive. Pinned at v1.0.0
+  # until lattice vendors the substrate into its own src/ tree.
+  url "https://github.com/luxcpp/lattice/archive/refs/tags/v1.0.0.tar.gz"
+  sha256 "92a0be5a7aa0c8dc9df0ba0ca6c64926f4ad7025d10820c2be37e1a95f39dad3"
   license "Apache-2.0"
   head "https://github.com/luxcpp/lattice.git", branch: "main"
 
