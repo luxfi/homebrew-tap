@@ -1,9 +1,11 @@
 class LuxLattice < Formula
   desc "GPU-accelerated lattice cryptography for the Lux platform"
   homepage "https://github.com/luxfi/luxcpp"
-  url "https://github.com/luxfi/luxcpp/archive/refs/tags/lattice-v1.0.0.tar.gz"
-  sha256 "0000000000000000000000000000000000000000000000000000000000000000"
   license "Apache-2.0"
+  # luxfi/luxcpp doesn't ship release tarballs yet — install with --HEAD
+  # to build from main. Stable URL wiring lands when the C++ tree gets
+  # its first release tag (will be `lattice-vX.Y.Z` per per-component
+  # versioning).
   head "https://github.com/luxfi/luxcpp.git", branch: "main"
 
   depends_on "cmake" => :build
