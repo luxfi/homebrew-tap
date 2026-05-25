@@ -1,12 +1,10 @@
 class LuxLattice < Formula
   desc "GPU-accelerated lattice cryptography for the Lux platform"
-  homepage "https://github.com/luxfi/luxcpp"
+  homepage "https://github.com/luxcpp/lattice"
+  url "https://github.com/luxcpp/lattice/archive/refs/tags/v1.0.0.tar.gz"
+  sha256 "92a0be5a7aa0c8dc9df0ba0ca6c64926f4ad7025d10820c2be37e1a95f39dad3"
   license "Apache-2.0"
-  # luxfi/luxcpp doesn't ship release tarballs yet — install with --HEAD
-  # to build from main. Stable URL wiring lands when the C++ tree gets
-  # its first release tag (will be `lattice-vX.Y.Z` per per-component
-  # versioning).
-  head "https://github.com/luxfi/luxcpp.git", branch: "main"
+  head "https://github.com/luxcpp/lattice.git", branch: "main"
 
   depends_on "cmake" => :build
 
@@ -15,17 +13,15 @@ class LuxLattice < Formula
   end
 
   def install
-    cd "lattice" do
-      args = std_cmake_args + %W[
-        -DCMAKE_INSTALL_RPATH=#{rpath}
-        -DBUILD_SHARED_LIBS=ON
-        -DLUXLATTICE_ENABLE_METAL=ON
-        -DLUXLATTICE_ENABLE_CUDA=OFF
-      ]
-      system "cmake", "-S", ".", "-B", "build", *args
-      system "cmake", "--build", "build", "--config", "Release"
-      system "cmake", "--install", "build"
-    end
+    args = std_cmake_args + %W[
+      -DCMAKE_INSTALL_RPATH=#{rpath}
+      -DBUILD_SHARED_LIBS=ON
+      -DLUXLATTICE_ENABLE_METAL=ON
+      -DLUXLATTICE_ENABLE_CUDA=OFF
+    ]
+    system "cmake", "-S", ".", "-B", "build", *args
+    system "cmake", "--build", "build", "--config", "Release"
+    system "cmake", "--install", "build"
   end
 
   test do
